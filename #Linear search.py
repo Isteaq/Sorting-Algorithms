@@ -99,36 +99,33 @@ def Shell_Sort(numbers, start_index, gap):
             j = j-gap
     return numbers
 '''
-
+'''
 #Quick Sort requires 2 functions (Parition and Quick Sort) unlike the previous Sorting algorithms
 # Partition function takes all values lower than the pivot on the left side and ->
 # -> all values greater than the pivot
 def Partition(numbers, low, high):
 
-    pivot = numbers[high]
-    i = low - 1
-    stack = []
+    mid = low + (high - low) // 2
+    pivot = numbers[mid]
 
-    stack.append((low, high))
+    done = False
 
-    while len(stack) > 0:
-        low, high = stack.pop()
+    while not done: 
 
-        while low < high:
-            while numbers[low] < pivot:
-                low += 1
-
-            while numbers[high] > pivot:
-                high -= 1
-
-            if high <= low:
-                break
-
-            temp = numbers[low]
-            numbers[low] = numbers[high]
-            numbers[high] = temp
-            low += 1
-            high -= 1
+        while numbers[low] < pivot:
+            low += 1 
+            
+        while numbers[high] > pivot:
+            high -= 1 
+        
+        if high <= low:
+            done = True
+        
+        temp = numbers[low]
+        numbers[low] = numbers[high]
+        numbers[high] = temp
+        low += 1
+        high -= 1 
 
     return high
     
@@ -140,11 +137,17 @@ def Quick_Sort(numbers, low, high):
     lowEndIndex = Partition(numbers, low, high) 
     Quick_Sort (numbers,low,lowEndIndex)
     Quick_Sort(numbers,lowEndIndex+1,high)    
+'''
+#Merge Sort takes 2 functions Merge and Merge_Sort
+def merge(numbers,start_index,firstEnd_Index,secondEnd_Index):
+
+def merge_sort(numbers,start_index_end_index):
+
 
 if __name__ == "__main__":
 # Call the function to demonstrate their usage
     numbers = [8,9,5,1,2]
-    Quick_Sort(numbers,0,4)
+    Merge_Sort(numbers,0,4)
     print(numbers)
 
 
