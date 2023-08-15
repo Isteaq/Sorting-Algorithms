@@ -101,24 +101,24 @@ def Shell_Sort(numbers, start_index, gap):
 '''
 
 #Quick Sort requires 2 functions (Parition and Quick Sort) unlike the previous Sorting algorithms
-# Parition function takes all values lower than the pivot on the left side and ->
+# Partition function takes all values lower than the pivot on the left side and ->
 # -> all values greater than the pivot
-def Parition(numbers, low, high):
+def Partition(numbers, low, high):
 
-    mid = (high - low) // 2
+    mid = low + (high - low) // 2
     pivot = numbers[mid]
 
     done = False
 
-    while(not done):
+    while not done: 
 
-        while(numbers[low] < pivot):
+        while numbers[low] < pivot:
             low += 1 
             
-        while(numbers[high] > pivot):
+        while numbers[high] > pivot:
             high -= 1 
         
-        if(high <= low):
+        if high <= low:
             done = True
         
         temp = numbers[low]
@@ -130,15 +130,19 @@ def Parition(numbers, low, high):
     return high
     
 def Quick_Sort(numbers, low, high):
-    if(high <= low):
+
+    if high <= low:
         return
-    else: 
-        Quick_Sort (numbers,low,mid)
-        Quick_Sort(numbers,mid+1,high)    
+    
+    lowEndIndex = Partition(numbers, low, high) 
+    Quick_Sort (numbers,low,lowEndIndex)
+    Quick_Sort(numbers,lowEndIndex+1,high)    
 
 if __name__ == "__main__":
 # Call the function to demonstrate their usage
-    numbers = [1,4,5,10,9]
+    numbers = [8,9,5,1,2]
     Quick_Sort(numbers,0,4)
+    print(numbers)
+
 
 
