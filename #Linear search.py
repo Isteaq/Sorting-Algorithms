@@ -84,9 +84,8 @@ if __name__ == "__main__":
     numbers = [1,2,5,10,8 ]
     print(Insertion_Sort (numbers))
 '''
-#Shell Sort - using gap values and interleaved lists to sort the array 
-
 '''
+#Shell Sort - using gap values and interleaved lists to sort the array 
 def Shell_Sort(numbers, start_index, gap):
     
     for i in range(start_index+gap, len(numbers),gap):
@@ -101,6 +100,9 @@ def Shell_Sort(numbers, start_index, gap):
     return numbers
 '''
 
+#Quick Sort requires 2 functions (Parition and Quick Sort) unlike the previous Sorting algorithms
+# Parition function takes all values lower than the pivot on the left side and ->
+# -> all values greater than the pivot
 def Parition(numbers, low, high):
 
     mid = (high - low) // 2
@@ -125,12 +127,14 @@ def Parition(numbers, low, high):
         low += 1
         high -= 1 
 
-    return numbers
+    return high
     
-def Quick_Sort():
-    
-    Quick_Sort(numbers,low,mid)
-    Quick_Sort(numbers,mid+1,high)    
+def Quick_Sort(numbers, low, high):
+    if(high <= low):
+        return
+    else: 
+        Quick_Sort (numbers,low,mid)
+        Quick_Sort(numbers,mid+1,high)    
 
 if __name__ == "__main__":
 # Call the function to demonstrate their usage
