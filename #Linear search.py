@@ -105,27 +105,30 @@ def Shell_Sort(numbers, start_index, gap):
 # -> all values greater than the pivot
 def Partition(numbers, low, high):
 
-    mid = low + (high - low) // 2
-    pivot = numbers[mid]
+    pivot = numbers[high]
+    i = low - 1
+    stack = []
 
-    done = False
+    stack.append((low, high))
 
-    while not done: 
+    while len(stack) > 0:
+        low, high = stack.pop()
 
-        while numbers[low] < pivot:
-            low += 1 
-            
-        while numbers[high] > pivot:
-            high -= 1 
-        
-        if high <= low:
-            done = True
-        
-        temp = numbers[low]
-        numbers[low] = numbers[high]
-        numbers[high] = temp
-        low += 1
-        high -= 1 
+        while low < high:
+            while numbers[low] < pivot:
+                low += 1
+
+            while numbers[high] > pivot:
+                high -= 1
+
+            if high <= low:
+                break
+
+            temp = numbers[low]
+            numbers[low] = numbers[high]
+            numbers[high] = temp
+            low += 1
+            high -= 1
 
     return high
     
