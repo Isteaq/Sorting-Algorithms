@@ -138,16 +138,31 @@ def Quick_Sort(numbers, low, high):
     Quick_Sort (numbers,low,lowEndIndex)
     Quick_Sort(numbers,lowEndIndex+1,high)    
 '''
-#Merge Sort takes 2 functions Merge and Merge_Sort
-def merge(numbers,start_index,firstEnd_Index,secondEnd_Index):
+#Merge Sort takes 2 functions 
+# Merge - merges the 2 halves into the list.
+# Merge_Sort - splits the list into 2 halves and recursively sorts the list.
 
-def merge_sort(numbers,start_index_end_index):
+def merge(numbers, low, mid, high):
+    list = [] 
+    list = numbers[low] + numbers[mid] + numbers[high]
+    return list
+    
 
+def merge_sort(numbers, start_index, end_index):
+
+    mid = (start_index + end_index) // 2
+    
+    if(start_index < end_index):
+
+        merge_sort(numbers,start_index, mid)
+        merge_sort(numbers,mid+1, end_index)
+
+        merge(numbers,start_index,mid,end_index)
 
 if __name__ == "__main__":
 # Call the function to demonstrate their usage
     numbers = [8,9,5,1,2]
-    Merge_Sort(numbers,0,4)
+    merge_sort(numbers,0,4)
     print(numbers)
 
 
