@@ -143,9 +143,48 @@ def Quick_Sort(numbers, low, high):
 # Merge_Sort - splits the list into 2 halves and recursively sorts the list.
 
 def merge(numbers, low, mid, high):
-    list = [] 
-    list = numbers[low] + numbers[mid] + numbers[high]
-    return list
+
+    #list for the new list 
+    list = []
+
+    #3 pointers, i to point to the left sublist, j to point to the right sublist and k to point to the new list
+    i = low
+    j = mid + 1
+    k = low
+    list = []
+
+    #this keeps i within the Left sublist and j within the right sublist
+    while(i <= mid and j <= high):
+
+        if numbers[i] < numbers[j]:
+           
+            list[k] = numbers[i]
+           
+            i+=1 
+
+        else:
+            list[k] = numbers[j]
+
+            j+=1
+
+        k+=1
+
+        #if i list is completed and j list has leftover elements, insert the remaining elements into the new list
+        if(i > mid):
+            while(j <= high):
+                list[k] = numbers[j]
+                j+=1
+                k+=1
+        else: 
+            while(i <= mid):
+                list[k] = numbers[i]
+                i+=1
+                k+=1
+        
+    for k in range(low, high+1):
+        numbers[k] = list[k]
+
+
     
 
 def merge_sort(numbers, start_index, end_index):
@@ -154,7 +193,10 @@ def merge_sort(numbers, start_index, end_index):
     
     if(start_index < end_index):
 
-        merge_sort(numbers,start_index, mid)
+        #recursively sorts the right half  
+        merge_sort(numbers,start_index, mid) 
+
+        #recursively sorts the right half 
         merge_sort(numbers,mid+1, end_index)
 
         merge(numbers,start_index,mid,end_index)
@@ -163,7 +205,7 @@ if __name__ == "__main__":
 # Call the function to demonstrate their usage
     numbers = [8,9,5,1,2]
     merge_sort(numbers,0,4)
-    print(numbers)
+    
 
 
 
