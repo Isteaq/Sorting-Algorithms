@@ -145,38 +145,45 @@ def Quick_Sort(numbers, low, high):
 def merge(numbers, low, mid, high):
 
     #new list 
-    merged_list = []
+    merged_size = (high - low) + 1
+
+    merged_list = [0] * merged_size
 
     #3 pointers, i to point to the left sublist, j to point to the right sublist and k to point to the new list
     i = low
     j = mid + 1
-
+    k = 0
 
     #this keeps i within the Left sublist and j within the right sublist
     while i <= mid and j <= high:
 
-        if numbers[i] < numbers[j]: 
-            merged_list.append(numbers[i])
-            i += 1 
+        if numbers[i] <= numbers[j]: 
+            merged_list[k] = numbers[i]
+            i += 1
 
         else:
-            merged_list.append(numbers[j])
+            merged_list[k] = numbers[j]
             j += 1
+
+        k += 1    
 
         #if i list is completed and j list has leftover elements, insert the remaining elements into the new list
         if(i > mid):
             while(j <= high):
-                merged_list.append(numbers[j])
-                j+=1
+                merged_list[k] = numbers[j]
+                j += 1
+                k += 1
         else: 
             while(i <= mid):
-                merged_list.append(numbers[i])
-                i+=1
-        
-    for k in range(low, high+1):
-        numbers[k] = merged_list[k-low]
+                merged_list[k] = numbers[i]
+                i += 1
+                k += 1 
 
+    for k in range(low, high):
+        numbers[k] = merged_list[k]
 
+    for m in range(len(merged_list)):
+        numbers[m] = merged_list[m]
     
 
 def merge_sort(numbers, start_index, end_index):
@@ -184,7 +191,7 @@ def merge_sort(numbers, start_index, end_index):
     if(start_index < end_index):
         mid = (start_index + end_index) // 2
 
-        #recursively sorts the right half  
+        #recursively sorts the left half  
         merge_sort(numbers,start_index, mid) 
 
         #recursively sorts the right half 
@@ -194,8 +201,10 @@ def merge_sort(numbers, start_index, end_index):
 
 if __name__ == "__main__":
 # Call the function to demonstrate their usage
-    numbers = [8,9,5,1,2]
-    merge_sort(numbers,0,4)
+    numbers = [15,5,24,8,1,3,16,10,20]
+    merge_sort(numbers,0,len(numbers)-1)
+    print(numbers)
+    
     
 
 
